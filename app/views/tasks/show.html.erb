@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <h3> Task一覧</h3>
+      <%= link_to 'Task 新規作成', new_task_path %></button>
+      <%= link_to 'Task 管理画面', tasks_path %></button>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |p| %>
+      <tr>
+        <td><%= p.title %></td>
+        <td><%= p.content %></td>
+      <tr>
+    <%end%>
+  </tbody>
+</table>

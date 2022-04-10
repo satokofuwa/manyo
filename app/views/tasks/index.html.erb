@@ -1,0 +1,16 @@
+<h1>Tasks#index</h1>
+<p id="notice"><%= notice %></p>
+<h3>タスク管理支援画面</h3>
+<table>
+  <tbody>
+    <% @tasks.each do |t| %>
+      <tr>
+        <td>タスク名：<%= t.title %> </td>
+        <td>内容：<%= t.content %></td>
+        <td><%= link_to '新規作成',new_task_path%>
+        <td><%= link_to '編集',edit_task_path(task.id)%>
+        <td><%= link_to '削除',task_path(task.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to ' タスク一覧画面',task_path(task.id)%>
+    <% end %>
+  </tbody>
+</table>
