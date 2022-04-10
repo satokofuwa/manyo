@@ -1,24 +1,34 @@
-# README
+* User model
+-------------------------------------------------
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+|Column              |Type     |Options| | | |
+|:----|:----|:----|:----|:----|:----|
+|name                 | string | | | | |
+|email                | text | | | | |
+|password_digest      | string| | | | |
+|created_at           | datetime |precision: |6, |null: |FALSE|
+|updated_at           | datetime |precision: |6, |null: |FALSE|
+|index_users_on_email | indexunique: true| | | |
 
-Things you may want to cover:
 
-* Ruby version
+* Task  model
+-------------------------------------------------
 
-* System dependencies
+|Column              |Type     |Options| | | | |
+|:----|:----|:----|:----|:----|:----|:----|
+| title                |   string    |null: |FALSE| | | |
+| content              |   text      |null: |FALSE| | | |
+| created_at           |   datetime  |precision: |6, |null: |FALSE|
+| updated_at           |   datetime  |precision: |6, |null: |FALSE|
+| index_tasks_on_task  |indexunique: true| | | |
+| index_tasks_on_user_id  |indexunique: true| | | |
 
-* Configuration
+* Label model
+-------------------------------------------------
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+|Column              |Type     |Options| | | |
+|:----|:----|:----|:----|:----|:----|
+|task_id|Bigint|null: |FALSE| | |
+|name|string|null: |FALSE| | |
+|created_at           | datetime |precision: |6, |null: |FALSE|
+|updated_at           | datetime |precision: |6, |null: |FALSE|
