@@ -15,7 +15,7 @@ class TasksController < ApplicationController
     
     def create
       @task = Task.new(task_params)
-        if @task.save
+        if @task.save!
           redirect_to tasks_url, notice: "Task was successfully created." 
         else
           redirect_to tasks_url, notice: "An error has occurred." 
@@ -23,7 +23,7 @@ class TasksController < ApplicationController
     end
   
     def update
-      if @task.update(task_params)    
+      if @task.update(task_params)   
         redirect_to tasks_url, notice: "Task has been successfully updated." 
       else
         redirect_to edit_task_url,notice: "An error has occered"
@@ -31,7 +31,7 @@ class TasksController < ApplicationController
     end
     
     def show 
-      @tasks = Task.all
+      @tasTks = Task.all
     end
   
     def destroy
