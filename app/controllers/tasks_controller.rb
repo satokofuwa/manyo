@@ -31,7 +31,7 @@ class TasksController < ApplicationController
     end
     
     def show 
-      @tasTks = Task.all
+      @tasks = Task.all
     end
   
     def destroy

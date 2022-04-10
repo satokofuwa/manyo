@@ -6,11 +6,17 @@
   </thead>
 
   <tbody>
-    <% @tasks.each do |p| %>
-      <tr>
-        <td><%= p.title %></td>
-        <td><%= p.content %></td>
-      <tr>
-    <%end%>
+  <tr>
+      <th>ID</th>
+      <td><%= @task.id %></td>
+    </tr>
+    <tr>
+      <th>タスク名</th>
+      <td><%= @task.title %></td>
+    </tr>
+    <tr>
+      <th>タスク詳細</th>
+      <td><%= @task.content %></td>
+    </tr>
   </tbody>
 </table>
