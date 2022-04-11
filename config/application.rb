@@ -1,11 +1,11 @@
 require_relative 'boot'
-
 require 'rails/all'
 Bundler.require(*Rails.groups)
-
 module Manyo
   class Application < Rails::Application
     config.load_defaults 6.0
+    config.i18n.default_locale = :ja
+    config.time_zone = 'Tokyo'
       config.generators do |g|
         g.test_framework :rspec,
         fixtures: true,

@@ -1,6 +1,6 @@
 <% if @task.errors.any? %>
   <div>
-    <h4><%= @task.errors.count%>件のエラーが有ります!</h4>
+    <h4><%= t('errors.template.other') %></h4>
     <ul>
       <%= @task.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
