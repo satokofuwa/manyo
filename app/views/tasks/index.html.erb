@@ -3,8 +3,8 @@
 <p id="notice"><%= notice %></p>
 <h3>タスク管理支援画面</h3>
 <table>
-  <tbody class = task_row>
-    <% @tasks.each do |task| %>
+  <tbody>
+    <%  @tasks.each do |task| %>
       <tr>
         <td>タスク名：<%= task.title %> </td>
         <td>内容：<%= task.content %></td>
