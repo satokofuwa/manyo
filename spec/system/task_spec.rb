@@ -17,6 +17,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   before do
     visit tasks_path
   end
+
   describe '一覧表示機能' do
     context '一覧画面に遷移した場合' do
         it '登録された一覧ページに表示されているかを確認する'do
@@ -28,8 +29,9 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
         task_list = all('td')
-        expect(task_list[0]).to have_content '仕事'
-        expect(task_list[1]).to have_content '内容：ミーティング'
+        binding.pry
+        expect(task_list[0]).to have_content 'タスク名：タスク2'
+        expect(task_list[1]).to have_content '内容：コンテント2'
       end
     end
   end
