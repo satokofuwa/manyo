@@ -7,7 +7,7 @@ RSpec.describe 'タスク管理機能', type: :system do
 
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
-      it '作成したタスク.終了期限が表示される' do
+      it '作成したタスク.終了期限.ステータスが表示される' do
         visit new_task_path
         fill_in 'task[title]', with: '部屋の片付け'
         fill_in 'task[content]', with: 'リビングと和室の片付けをする'

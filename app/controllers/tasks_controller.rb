@@ -2,11 +2,27 @@ class TasksController < ApplicationController
     before_action :set_task, only: %i[show edit update destroy ]
   
     def index
-      if params[:sort_expired].present? 
-           @tasks = Task.order(expired_at: :desc)
-      else
-           @tasks = Task.order(created_at: :desc)
-      end
+
+      @tasks = Task.order(created_at: :desc)
+        #曖昧検索
+        if params[:task].present?
+          if params[:task][:search].present? && params[:task][:status].blank?
+            @tasks = @tasks.keyword(params[:task][:search])
+          elsif 
+            params[:task][:status].present? && params[:task][:search].blank?
+            @tasks = @tasks.status_select(params[:task][:status])
+          elsif
+            params[:task][:search].present? && params[:task][:status].present?
+            @tasks = @tasks.keyword_status(params[:task][:search],params[:task][:status])
+          end
+        end
+
+        #ステータスを入力
+       # @tasks = Task.where(status: params[:status])
+        #終了期限を入力する。
+        if params[:sort_expired].present?
+          @tasks = Task.order(expired_at: :desc)
+        end
     end
   
     def new
@@ -52,6 +68,6 @@ class TasksController < ApplicationController
     end
   
     def task_params
-      params.require(:task).permit(:title, :content,:expired_at)
+      params.require(:task).permit(:title, :content,:expired_at,:status)
     end
   end

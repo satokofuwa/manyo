@@ -1,19 +1,24 @@
 
 <h1>Tasks#index</h1>
-<p id="notice"><%= notice %></p>
-<h3>タスク管理支援画面</h3>
- <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
-<table>
-  <tbody>
-    <%  @tasks.each do |task| %>
-      <tr>
-        <td class = "test">タスク名：<%= task.title %> </td>
-        <td>内容：<%= task.content %></td>
-        <td>終了期限：<%= task.expired_at %></td>
-        <td><%= link_to '新規作成',new_task_path%>
-        <td><%= link_to '編集',edit_task_path(task.id)%>
-        <td><%= link_to '削除',task_path(task.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to ' タスク一覧画面',task_path(task.id)%>
-      <% end %>
-  </tbody>
-</table>
+  <p id="notice"><%= notice %></p>
+    <h3>タスク管理支援画面</h3>
+      <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true",id: 'ソート' ) %>
+        <%= form_with url:tasks_path, scope: :task, method: :get, local: true do |form| %>
+          <%= form.text_field :search,id: '検索' %>
+            <%= form.select :status, Task.statuses.keys.to_a, {prompt: "選択してください"},class: "status-select"%>
+              <%= form.submit 'Search',title: nil %>
+        <% end %>
+
+        <table>
+            <%@tasks.each do |task| %>
+              <tr>
+                <td class = "test">タスク名：<%= task.title %> </td>
+                <td>内容：<%= task.content %></td>
+                <td>終了期限：<%= task.expired_at %></td>
+                <td>ステータス：<%= task.status %></td>
+                <td><%= link_to '新規作成',new_task_path%>
+                <td><%= link_to '編集',edit_task_path(task.id)%>
+                <td><%= link_to '削除',task_path(task.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= link_to ' タスク一覧画面',task_path(task.id)%>
+            <% end %>
+        </table>

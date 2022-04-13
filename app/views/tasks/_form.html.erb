@@ -16,6 +16,8 @@
   <%= form.text_field :content %>
   <%= form.label :expired_at %>
   <%= form.text_field :expired_at %>
+  <%= form.label :status %>
+  <%= form.select :status, Task.statuses.keys.to_a, {} %>
 
   <div class="actions">
     <%= form.submit %>
