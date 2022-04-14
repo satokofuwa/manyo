@@ -18,6 +18,8 @@
   <%= form.text_field :expired_at %>
   <%= form.label :status %>
   <%= form.select :status, Task.statuses.keys.to_a, {} %>
+  <%= form.label :priority %>
+  <%= form.select :priority, Task.priorities.keys.to_a, {} %>
 
   <div class="actions">
     <%= form.submit %>
