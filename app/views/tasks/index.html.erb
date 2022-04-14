@@ -23,4 +23,5 @@
                 <td><%= link_to '編集',edit_task_path(task.id)%>
                 <td><%= link_to '削除',task_path(task.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
             <% end %>
+            <%= paginate @tasks %>
         </table>
