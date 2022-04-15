@@ -9,20 +9,28 @@
   </div>
 <% end %>
 
-<%= form_with(model: @task, local: true) do |form| %>
-  <%= form.label :title %>
-  <%= form.text_field :title %>
-  <%= form.label :content %>
-  <%= form.text_field :content %>
-  <%= form.label :expired_at %>
-  <%= form.text_field :expired_at %>
-  <%= form.label :status %>
-  <%= form.select :status, Task.statuses.keys.to_a, {} %>
-  <%= form.label :priority %>
-  <%= form.select :priority, Task.priorities.keys.to_a, {} %>
-
-  <div class="actions">
-    <%= form.submit %>
+<div class="center-contents col-md-10">
+<table>
+<tr>
+  <%= form_with(model: @task, local: true) do |form| %>
+  <td><%= form.label :title %></td>
+  <td><%= form.text_field :title %><td>
+  <td><%= form.label :content %><td>
+  <td><%= form.text_field :content %><td>
+  <td><%= form.label :expired_at %><td>
+  <td><%= form.text_field :expired_at %><td>
+  <td><%= form.label :status %><td>
+  <td><%= form.select :status, Task.statuses.keys.to_a, {} %><td>
+  <td><%= form.label :priority %><td>
+  <td><%= form.select :priority, Task.priorities.keys.to_a, {} %><td>
+  <div class="left-contents col-md-10">
+    <div class="actions" >
+      <%= form.submit%>
+    </div>
   </div>
-<% end %>
-  <%= link_to "一覧画面にもどる", tasks_path%>
+  <% end %>
+</div>
+
+<div class="left-contents col-md-10">
+  <%= link_to "一覧画面にもどる", tasks_path, class:'btn btn-outline-primary'%>
+</div>

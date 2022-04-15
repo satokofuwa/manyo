@@ -1,0 +1,13 @@
+<div class="left-contents col-md-8">
+  <h2>確認画面</h2>
+</div>
+  <%= form_with(model: @task, local: true) do |form| %>
+   <p class="abc"><strong>タイトル: <%= @task.title %></strong></p> 
+    <p class="abc"><strong>内容: <%= @task.content %></strong></p> 
+    <%= form.hidden_field :content %>
+    <br>
+    <br>
+    <%= form.submit "タスク作成" %>
+  <% end %>
+    <%= link_to "作成画面に戻る", new_task_path%>
+<br>

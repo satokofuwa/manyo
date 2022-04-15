@@ -27,7 +27,12 @@ class TasksController < ApplicationController
     def new
       @task = Task.new
     end
-  
+
+    def confirm
+      @task = current_user.tasks.build(task_params)
+      render :new  if @task.invalid?
+    end
+
     def edit
       @task = Task.find(params[:id])
     end

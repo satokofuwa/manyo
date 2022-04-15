@@ -1,6 +1,27 @@
 .btn btn btn-link {
   background-color:lightskyblue;
-  color: white;
-  
+  color: black;
   }
 
+  table{
+    border-collapse:separate;
+    border-spacing: 5px;
+    width: 100%;
+  }
+  
+  table th,table td{
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px 0;
+  }
+  
+  table th{
+    background-color: #3cb4c9;
+    color: white;
+    border:solid 1px #3cd1d6;
+  }
+  
+  table td{
+    background-color: #a6d3db;
+    border:solid 1px hwb(191 73% 12%);
+  }
