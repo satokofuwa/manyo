@@ -1,16 +1,13 @@
-
 <h1>Tasks#index</h1>
-  <p id="notice"><%= notice %></p>
     <h3>タスク管理支援画面</h3>
-      <td><%= link_to '新規作成',new_task_path%>
+       <%= link_to '新規作成',new_task_path%>
         <%= form_with url:tasks_path, scope: :task, method: :get, local: true do |form| %>
           <%= form.text_field :search,id: '検索' %>
             <%= form.select :status, Task.statuses.keys.to_a, {prompt: "選択してください"},class: "status-select"%>
-            <%= link_to "優先度でソートする", tasks_path(priority_sort: "true"), id: '優先度' %></p>
-            <%= link_to "終了期限ソート", tasks_path(sort_expired: "true",id: 'ソート' ) %>
-              <%= form.submit 'Search',title: nil %>
+              <button type="button" class="btn btn-link"></button><%= link_to "優先度", tasks_path(priority_sort: "true"), id: '優先度' %></button>
+              <button type="button" class="btn btn-link"></button><%= link_to "終了期限", tasks_path(sort_expired: "true",id: 'ソート' ) %></button>
+               <%= form.submit 'Search',title: nil %>
         <% end %>
-  
         <table>
             <%@tasks.each do |task| %>
               <tr>
@@ -21,7 +18,8 @@
                 <td class= "priority">優先順位:<%= task.priority %></td>
                 <td><%= link_to 'タスク詳細',task_path(task.id)%>
                 <td><%= link_to '編集',edit_task_path(task.id)%>
-                <td><%= link_to '削除',task_path(task.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= link_to '削除',task_path(task.id), method: :delete, data: { confirm: 'Are you sure?' } %></td></td>
             <% end %>
-            <%= paginate @tasks %>
+              <tr>
         </table>
+          <%= paginate @tasks %>
