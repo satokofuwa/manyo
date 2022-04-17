@@ -1,3 +1,4 @@
+
 <% if @task.errors.any? %>
   <div>
     <h4><%= t('errors.template.other') %></h4>
@@ -12,7 +13,7 @@
 <div class="center-contents col-md-10">
 <table>
 <tr>
-  <%= form_with(model: @task, local: true) do |form| %>
+  <%= form_with(model: @task, local: true,url:choose_new_or_edit) do |form| %>
   <td><%= form.label :title %></td>
   <td><%= form.text_field :title %><td>
   <td><%= form.label :content %><td>
@@ -26,9 +27,12 @@
   <div class="left-contents col-md-10">
     <div class="actions" >
       <%= form.submit%>
+
     </div>
   </div>
   <% end %>
+
+
 </div>
 
 <div class="left-contents col-md-10">

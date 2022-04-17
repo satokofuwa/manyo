@@ -1,7 +1,8 @@
 class Task < ApplicationRecord
   validates :title, presence: true, length: {maximum: 50}
   validates :content, presence: true, length: {maximum: 100}
-  #belongs_to :user
+  
+  belongs_to :user
 
   enum status: {"未着手": 0, "着手中": 1, "完了": 2}
   enum priority: {"低": 0, "中": 1, "高": 2}

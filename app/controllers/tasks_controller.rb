@@ -25,12 +25,12 @@ class TasksController < ApplicationController
     end
   
     def new
-      @task = Task.new
+        @task = Task.new
     end
 
     def confirm
       @task = current_user.tasks.build(task_params)
-      render :new  if @task.invalid?
+      redirect_to new_task_url  if @task.invalid?
     end
 
     def edit
@@ -38,12 +38,16 @@ class TasksController < ApplicationController
     end
     
     def create
-      @task = Task.new(task_params)
-        if @task.save!
-          redirect_to tasks_url, notice: "Task was successfully created." 
-        else
-          redirect_to tasks_url, notice: "An error has occurred." 
+      @task = current_user.tasks.build(task_params)
+        if @task.present?
+          @task.save
+          flash[:notice] = "登録が完了しました。"
+          redirect_to new_task_url
+            else
+          flash[:notice] = "エラーが発生しました。"
+          redirect_to new_task_url
         end
+    
     end
   
     def update
@@ -74,4 +78,12 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:title, :content,:expired_at,:status,:priority)
     end
+
+    def check_user
+      @task = Task.find(params[:id])
+      if current_user.id != @task.user_id
+      # ログインしているユーザーのIDと投稿されているユーザーのIDが違っている場合
+        redirect_to tasks_path, notice: '他人のページへアクセスはできません'
+      end
   end
+end

@@ -5,8 +5,10 @@ ja:
       user: ユーザー
     attributes:
       task:
-        title: タイトル
+        title: タスク名
         content: 内容
+        status: ステータス
+        priority: 優先度
       user:
         name: 名前
         email: メールアドレス

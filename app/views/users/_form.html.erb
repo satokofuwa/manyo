@@ -1,5 +1,5 @@
+
 <%= form_with(model: @user, local: true) do |f| %>
-  <div class="field">
       <br>
 		   <%= f.label :name %>
         <%= f.text_field :name %>
@@ -11,10 +11,9 @@
         <%= f.password_field :password_confirmation %>
       <br>
       <br>
-  </div>
-
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
-<%= link_to "User Show",user_path%>
+
+<!--<%= link_to "User Show",user_path,class: "btn btn-info"%>-->

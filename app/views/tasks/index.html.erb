@@ -10,12 +10,14 @@
           <%= form.submit 'Search',title: nil %>
     <% end %>
     </div>
-
-  <div class="left-contents col-md-8">
+  </div>  
+ 
+ 
+  <div class="left-contents col-md-6">
     <table>
       <%@tasks.each do |task| %>
         <tr>
-          <td class = "test",class="border-bottom">タスク名:<%= task.title %> </td>
+          <td class = "test">タスク名:<%= task.title %> </td>
           <td>内容:<%= task.content %></td>
           <td class = "expired">終了期限:<%= task.expired_at %></td>
           <td>ステータス:<%= task.status %></td>
@@ -24,9 +26,9 @@
           <td><%= link_to '編集',edit_task_path(task.id),class: 'btn btn-outline-success'%></button>
           <td><%= link_to '削除',task_path(task.id),class: 'btn btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } %></td></td>
       <% end %>
-    </div>
         <tr>
     </table>
     </div>
-      <div class="col-md-6 col-md-offset-1"> <%= paginate @tasks %>
-    </div>
+      <div class="col-md-6 col-md-offset-1"><%= paginate @tasks %></div>
+
+  

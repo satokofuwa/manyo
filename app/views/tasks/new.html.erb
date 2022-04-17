@@ -1,4 +1,7 @@
 <div class="left-contents col-md-8">
   <h1>Task 作成画面</h1>
+  <div class="left-contents col-md-8">
+    <%= flash[:notice] %>
+</div>
 </div>
   <%= render 'form', task: @task, class: 'btn btn-outline-primary' %>
