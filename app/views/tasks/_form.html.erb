@@ -14,25 +14,22 @@
 <table>
 <tr>
   <%= form_with(model: @task, local: true,url:choose_new_or_edit) do |form| %>
-  <td><%= form.label :title %></td>
-  <td><%= form.text_field :title %><td>
-  <td><%= form.label :content %><td>
-  <td><%= form.text_field :content %><td>
-  <td><%= form.label :expired_at %><td>
-  <td><%= form.text_field :expired_at %><td>
-  <td><%= form.label :status %><td>
-  <td><%= form.select :status, Task.statuses.keys.to_a, {} %><td>
-  <td><%= form.label :priority %><td>
-  <td><%= form.select :priority, Task.priorities.keys.to_a, {} %><td>
-  <div class="left-contents col-md-10">
-    <div class="actions" >
-      <%= form.submit%>
-
-    </div>
-  </div>
+    <td><%= form.label :title %></td>
+    <td><%= form.text_field :title %><td>
+    <td><%= form.label :content %><td>
+    <td><%= form.text_field :content %><td>
+    <td><%= form.label :expired_at %><td>
+    <td><%= form.text_field :expired_at %><td>
+    <td><%= form.label :status %><td>
+    <td><%= form.select :status, Task.statuses.keys.to_a, {} %><td>
+    <td><%= form.label :priority %><td>
+    <td><%= form.select :priority, Task.priorities.keys.to_a, {} %><td>
+      <div class="left-contents col-md-10">
+        <div class="actions" >
+          <%= form.submit%>
+        </div>
+      </div>
   <% end %>
-
-
 </div>
 
 <div class="left-contents col-md-10">

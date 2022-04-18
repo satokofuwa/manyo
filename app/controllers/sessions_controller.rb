@@ -6,8 +6,8 @@ class SessionsController < ApplicationController
           
   def create
     if logged_in?
-      flash[:notice] = 'Already logged in'
-      redirect_to new_session_path
+      flash[:notice] = 'ログイン済みです'
+      redirect_to user_path(user.id)
     else
       user = User.find_by(email: params[:session][:email].downcase)
         if user && user.authenticate(params[:session][:password])

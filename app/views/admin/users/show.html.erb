@@ -1,0 +1,31 @@
+<h1><%= @user.name %>のページ</h1>
+
+  <%= link_to 'タスク登録', new_task_path %>
+  <%= link_to 'プロフィール編集', edit_admin_user_path(@user) %>
+
+<table>
+  <tr>
+    <td>名前:<%= @user.name %></td>
+    <td>メールアドレス:<%= @user.email %></td>
+    <td>管理者権限:<%= @user.admin %></td>
+  </tr>
+</table>
+
+<h2>タスク一覧</h2>
+<table>
+  <% @user.tasks.each do |task| %>
+    <tr>
+      <td>タスク名:<%= task.name %></td>
+      <td>内容:<%= task.content %></td>
+      <td>作成日:<%= task.created_at %></td>
+      <td>終了日:<%= task.expired_at %></td>
+      <td>ステータス：<%= task.status %></td>
+      <td>優先度:<%= task.priority %></td>
+      <td><%= link_to '詳細', task_path(task.id) %></td>
+      <td><%= link_to '編集', edit_task_path(task.id), data: { confirm: '編集でよろしいですか？' } %></td>
+      <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'ユーザー一覧へ戻る', admin_users_path %>

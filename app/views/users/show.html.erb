@@ -1,9 +1,14 @@
 <div class="left-contents col-md-2">
  <h1><%= @user.name %>のページ</h1>
- </div> 
- <div class="left-contents col-md-4">
-<p>名前: <%= @user.name %></p>
-<p>メールアドレス: <%= @user.email %></p>
+</div> 
+<div class="left-contents col-md-4"> 
+  <p>名前: <%= @user.name %></p>
+</div>
+<div class="left-contents col-md-3">
+  <p>メールアドレス: <%= @user.email %></p>
+</div>
+<div class="left-contents col-md-3">
+  <p>権限:<%= @user.admin %></p>
 </div>
 
 <div class="left-contents col-md-6">

@@ -51,10 +51,10 @@ class TasksController < ApplicationController
     end
   
     def update
-      if @task.update(task_params)   
-        redirect_to tasks_url, notice: "Task has been successfully updated." 
+      if @task.update!(task_params)   
+        redirect_to tasks_url, notice: "タスクが更新されました" 
       else
-        redirect_to edit_task_url,notice: "An error has occered"
+        redirect_to edit_task_url,notice: "エラーが発生しました"
       end
     end
     
@@ -65,7 +65,7 @@ class TasksController < ApplicationController
     def destroy
       if @task.present?
            @task.destroy
-        redirect_to tasks_url, notice:  "Task has been deleted!"
+        redirect_to tasks_url, notice:  "タスクが削除されました"
       end
     end 
   
