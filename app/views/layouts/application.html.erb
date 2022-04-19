@@ -15,9 +15,9 @@
   </head>
   <body>
     <% if logged_in? %>
-      <%= link_to "管理ユーザ画面", admin_users_path %> 
-      <%= link_to "編集画面 ", edit_user_path(current_user.id) %> 
-      <%= button_to "Logout", session_path(current_user.id), method: :delete %>
+      <%= link_to "管理ユーザ画面", admin_users_path ,class: "btn btn-info"%> 
+      <!--<%= link_to "編集画面 ", edit_user_path(current_user.id) %> -->
+      <%= button_to "Logout", session_path(current_user.id), method: :delete, class: "btn btn-outline-danger" %>
     <% else %>
       <%= link_to "Sign up", new_user_path,class: "btn btn-info"  %> 
       <%= link_to "Login", new_session_path,class: "btn btn-info"  %>

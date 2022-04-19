@@ -60,7 +60,7 @@ class TasksController < ApplicationController
     end
     
     def show 
-      @tasks = Task.all
+      @tasks = Task.all.select(:id, :titile, :content)
     end
   
     def destroy

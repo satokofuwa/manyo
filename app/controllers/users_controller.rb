@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, :check_admin, only: %i[ show edit  ]
+  before_action :set_user, :check_admin, only: %i[ show edit ]
   skip_before_action :login_required, only: [:new, :create]  
   
   def new
@@ -12,14 +12,12 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         flash[:notice] ='ログインしました'
         redirect_to user_path(@user.id),notice: "ユーザー「#{@user.name}」を登録しました。"
-      
       else
         render :new
       end
   end
 
   def update
-
     respond_to do |format|
       @user = User.find(params[:id])
       if @user.update(user_params)     
