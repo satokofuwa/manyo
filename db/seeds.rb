@@ -14,7 +14,7 @@
     #priority: "高",
     #)
 #end
-
+require 'faker'
 User.create!(name:  "Example User",
   email: "example@railstutorial.org",
   password:              "foobar",
@@ -29,7 +29,7 @@ User.create!(name:  name,
     email: email,
     password:              password,
     password_confirmation: password,
-    admin: "ユーザ")
+    admin: "ユーザー")
 end
 #5.times do |n|
  # User.create!(
