@@ -33,7 +33,6 @@ class UsersController < ApplicationController
   end
             
   def show
-  #@user = User.find(params[:id])
   @tasks = Task.where(user_id: @user.id)
   end
            
@@ -42,9 +41,9 @@ class UsersController < ApplicationController
 
   def destroy
     if User.find(params[:id]).destroy
-      redirect_to admin_users_path, flash[:notice]="{@user.name}を削除しました"
+      redirect_to admin_users_path
     else
-      redirect_to admin_users_path,  flash[:notice]= "管理者がいなくなるので削除できません"
+      redirect_to admin_users_path
     end
   end
 

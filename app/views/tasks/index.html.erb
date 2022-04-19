@@ -12,11 +12,14 @@
     </div>
   </div>  
  
- 
-  <div class="left-contents col-md-6">
+   <%= button_to "Logout", session_path(current_user.id), method: :delete %>
+
+  <%=@tasks.count%>件のタスクがあります。
+  <div class="left-contents col-md-10">
     <table>
       <%@tasks.each do |task| %>
         <tr>
+          <td class = "test">ユーザー: <%= task.user.name %></p>
           <td class = "test">タスク名:<%= task.title %> </td>
           <td>内容:<%= task.content %></td>
           <td class = "expired">終了期限:<%= task.expired_at %></td>

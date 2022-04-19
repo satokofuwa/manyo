@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :basic_auth #basic認証
-  before_action :login_required 
+  before_action :login_required
     protect_from_forgery with: :exception #クロスサイトリクエストフォージェリ
       include SessionsHelper
 

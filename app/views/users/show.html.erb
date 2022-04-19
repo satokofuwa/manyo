@@ -10,6 +10,10 @@
 <div class="left-contents col-md-3">
   <p>権限:<%= @user.admin %></p>
 </div>
+<div class="left-contents col-md-3">
+   <%= @user.name %>さん
+   <%= @tasks.count%>件のタスクがあります。
+</div>
 
 <div class="left-contents col-md-6">
     <table>

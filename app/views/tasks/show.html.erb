@@ -3,29 +3,27 @@
 <table>
   <thead>
     <h3> Task一覧</h3>
-  </div>
-
   </thead>
-
- <div div class="col-4 col-sm-1">
-  <tbody>
-  <tr>
-      <th>ID</th>
-      <td><%= @task.id %></td>
-    </tr>
-    <tr>
-      <th>タスク名</th>
-      <td><%= @task.title %></td>
-    </tr>
-    <tr>
-      <th>タスク詳細</th>
-      <td><%= @task.content %></td>
-    </tr>
-  </tbody>
+    
+      <tbody>
+        <tr>
+          <th>ID</th>
+            <td><%= @task.id %></td>
+        </tr>
+        <tr>
+          <th>タスク名</th>
+            <td><%= @task.title %></td>
+          </tr>
+        <tr>
+          <th>タスク詳細</th>
+            <td><%= @task.content %></td>
+        </tr>
+      </tbody>
 </table>
 </div>
- </div>
- <div class="center-contents col-md-10">
-      <%= link_to 'Task 新規作成', new_task_path, class: 'btn btn-outline-primary' %></button>
-      <%= link_to 'Task 管理画面', tasks_path, class: 'btn btn-outline-primary'%></button>
-     </div>
+
+<div class="center-contents col-md-5">
+  <%= link_to 'Task 新規作成', new_task_path, class: 'btn btn-outline-primary' %>
+  <%= link_to 'Task 管理画面', tasks_path, class: 'btn btn-outline-primary'%>
+  <%= link_to '編集',edit_task_path(@task.id),class: 'btn btn-outline-success'%>
+</div>
