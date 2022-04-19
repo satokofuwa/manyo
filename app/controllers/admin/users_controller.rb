@@ -38,7 +38,7 @@ end
 
 def destroy
   if @user.destroy
-    redirect_to admin_users_path, notice: "{@user.name}を削除しました"
+    redirect_to admin_users_path, notice: "#{@user.name}を削除しました"
   else
     redirect_to admin_users_path, notice: "管理者がいなくなるので削除できません"
   end
