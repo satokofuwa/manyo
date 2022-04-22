@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="left-contents col-md-8">
   <h2>確認画面</h2>
 </div>
@@ -19,3 +20,63 @@
             <%= form.submit "タスク作成" %>
               <% end %>
                 <%= link_to "作成画面に戻る", new_task_path, class: 'btn btn-outline-primary'%> <br>
+=======
+<%= form_with(model: @task, local: true, url:choose_new_or_edit) do |form| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <p class="error"><%= @task.errors.count %>件のエラーがあります。</p>
+      <ul>
+        <% @task.errors.full_messages.each do |msg| %>
+          <li class="error"><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="left-contents col3">
+<table>
+<tr>
+    <div class="field">
+      <td><%= form.label :title %></td>
+      <td><%= form.text_field :title %><td>
+    </div>
+
+    <div class="field">
+      <td><%= form.label :content %><td>
+      <td><%= form.text_field :content %><td>
+    </div>
+
+    <div class="field">
+      <td><%= form.label :expired_at %><td>
+      <td><%= form.text_field :expired_at %><td>
+    </div>
+
+    <div class="field">
+      <td><%= form.label :status %><td>
+      <td><%= form.select :status, Task.statuses.keys.to_a, {} %><td>
+    </div>
+
+    <div class="field">
+      <td><%= form.label :priority %><td>
+      <td><%= form.select :priority, Task.priorities.keys.to_a, {} %><td>
+    </div>
+
+    <div class="field">
+      <%= form.label :ラベル %>
+      <%= form.collection_check_boxes(:label_ids, Label.all, :id, :label_name) %>
+    </div>
+
+      <div class="left-contents col-md-10">
+      <div class="actions" >
+        <%= form.submit%>
+      </div>
+    </div>
+   
+    </table>
+  </div>  
+  <% end %>
+
+<div class="left-contents col-md-10">
+  <%= link_to "一覧画面にもどる", tasks_path, class:'btn btn-outline-primary'%>
+</div>
+>>>>>>> step5

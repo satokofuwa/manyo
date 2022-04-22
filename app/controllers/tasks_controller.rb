@@ -23,6 +23,7 @@ class TasksController < ApplicationController
           @tasks = @tasks.priority_sort
         end
         @tasks=@tasks.page(params[:page]).per(10)
+      
     end
   
     def new
@@ -51,7 +52,7 @@ class TasksController < ApplicationController
     end
   
     def update
-      if @task.update!(task_params)   
+      if @task.update(task_params)   
         redirect_to tasks_url, notice: "タスクが更新されました" 
       else
         redirect_to edit_task_url,notice: "エラーが発生しました"
@@ -75,7 +76,7 @@ class TasksController < ApplicationController
     end
   
     def task_params
-      params.require(:task).permit(:title, :content,:expired_at,:status,:priority)
+      params.require(:task).permit(:title, :content,:expired_at,:status,:priority,{ label_ids:[]})
     end
 
     def check_user

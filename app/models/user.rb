@@ -8,6 +8,7 @@ class User < ApplicationRecord
   enum admin: {"管理者": true, "ユーザー": false}
 
   has_secure_password 
+<<<<<<< HEAD
   has_many :tasks,dependent: :destroy
     accepts_nested_attributes_for :tasks
 
@@ -17,4 +18,25 @@ private
       raise ArgumentError, "管理者が0人になります。"
     end 
   end
+=======
+  has_many :tasks, dependent: :destroy
+
+  before_update :admin_update_check
+  before_destroy :admin_delete_check
+
+   private
+   def admin_update_check
+    if User.where(admin: true).count == 1 && self.admin
+      throw(:abort) 
+    end
+  end
+
+  def admin_delete_check
+    if User.where(admin: true).count == 1 && self.admin
+      throw(:abort)
+      flash[:notice] ='最後のユーザーは削除できません'
+    end
+  end
+  
+>>>>>>> step5
 end

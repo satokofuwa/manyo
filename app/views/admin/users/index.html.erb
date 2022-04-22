@@ -1,17 +1,30 @@
-    <h1>ユーザ一一覧</h1>
-    <table>
-      <% @users.each do |user| %>
-        <tr>
-          <td >ユーザー名:<%= user.name %> </td>
-          <td>メールアドレス:<%= user.email %></td>
-          <td>権限:<%= user.admin %></td>
-            <td><%= button_to '編集 ', edit_admin_user_path(user.id) ,method: :get,class: 'btn btn-outline-success',data: { confirm: '編集しますか？' } %></td>
-            <td><%= button_to '削除', user_path(user.id), method: :delete, remote: true,class: 'btn btn-outline-danger',data: { confirm: '本当に削除していいですか？' }%></td>
-        </tr>
-         <% end %>
-    </table>
-      <td><%= link_to 'ユーザー新規登録', new_admin_user_path,class:'btn btn-outline-primary' %></td>
-      <td><%= link_to 'タスク一覧へ', tasks_path,class:'btn btn-outline-primary' %></td>
-  
+<h1>ユーザ一一覧</h1>
+<table>
 
+  <%= flash[:notice] %>
+  <% @users.each do |user| %>
+      <tr>
+        <td>ユーザー名:
+          <%= user.name %>
+        </td>
+        <td>タスク数:
+          <%=user.tasks.pluck(:title).size%>
+        </td>
+         <td>
+          <%= button_to '詳細', admin_user_path(user.id), method: :get, class: 'btn btn-outline-primary',data: { confirm: '詳細を表示します' }%>
+        </td>
+        <td>
+          <%= button_to '編集 ', edit_admin_user_path(user.id) ,method: :get,class: 'btn btn-outline-success',data: { confirm: '編集しますか？' } %>
+        </td>
+       
+        <td>
+          <%= button_to 'ユーザー削除', user_path(user.id), method: :delete, remote: true,class: 'btn btn-outline-danger'%>
+        </td>
+      
+      </tr>
+      <% end %>
+</table>
+<td>
+  <%= link_to 'タスク一覧へ', tasks_path,class:'btn btn-outline-primary' %>
+</td>
   

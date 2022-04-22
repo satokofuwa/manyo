@@ -2,9 +2,18 @@ class UsersController < ApplicationController
   before_action :set_user, :check_admin, only: %i[ show edit ]
   skip_before_action :login_required, only: [:new, :create]  
   
+<<<<<<< HEAD
     def new
       @user = User.new
     end        
+=======
+  def new
+    if logged_in?
+      redirect_to tasks_path
+    end
+    @user = User.new
+  end        
+>>>>>>> step5
     
     def create
       @user = User.new(user_params)
@@ -17,6 +26,7 @@ class UsersController < ApplicationController
         end
     end
 
+<<<<<<< HEAD
     def update
       respond_to do |format|
         @user = User.find(params[:id])
@@ -43,6 +53,36 @@ class UsersController < ApplicationController
       else
         redirect_to admin_users_path
       end
+=======
+  def update
+      @user = User.find(params[:id])
+      if @user.update(user_params)     
+         redirect_to tasks_url
+        flash[:notice] = "ユーザー情報が更新されました" 
+       
+      else
+        redirect_to tasks_url
+        flash[:notice] = "管理者一人の為更新できません" 
+      end
+  end
+            
+  def show
+    @tasks = Task.where(user_id: @user.id)
+    unless current_user.id == @user.id then
+        redirect_to tasks_path, notice: '他人のページへアクセスはできません'
+    end
+
+  end
+           
+  def edit
+  end
+
+  def destroy
+    if User.find(params[:id]).destroy
+      redirect_to admin_users_path
+      flash[:notice] = "#{User.find(params[:id]).name}を削除しました"
+   
+>>>>>>> step5
     end
 
 
@@ -61,4 +101,5 @@ class UsersController < ApplicationController
       redirect_to tasks_path, flash[:notice]= "管理者以外はアクセスできません"
     end
   end
+
 end

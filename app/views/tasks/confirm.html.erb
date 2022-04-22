@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="left-contents col-md-8">
   <h2>確認画面</h2>
 </div>
@@ -19,3 +20,40 @@
             <%= form.submit "タスク作成" %>
               <% end %>
                 <%= link_to "作成画面に戻る", new_task_path, class: 'btn btn-outline-primary'%> <br>
+=======
+<table>
+  <thead>
+    <h3> 確認画面</h3>
+  </thead>
+  <tbody>
+    </div>
+    <%= form_with(model: @task, local: true) do |form| %>
+      <div class="left-contents col3">
+        <%= form.submit "タスク作成" %>
+      </div>
+      <%= form.hidden_field :title %>
+        <%= form.hidden_field :content %>
+          <%= form.hidden_field :expired_at %>
+            <%= form.hidden_field :status %>
+              <%= form.hidden_field :priority %> <strong>タスク名: <%= @task.title %></strong></p>
+                <p><strong>内容: <%= @task.content %></strong></p>
+                <p><strong>終了期限: <%= @task.expired_at %></strong></p>
+                <p><strong>ステータス: <%= @task.status %></strong></p>
+                <p><strong>優先度: <%= @task.priority %></strong></p>
+                <td>
+                  <%= form.label :label_name %>
+                    </td>
+                      <td>
+                        <%= collection_check_boxes(:task,:label_ids, Label.all, :id,:label_name)do |b| %>
+                      </td>
+                      <td>
+                        <%=b.label { b.check_box + b.text }%>
+                          </td>
+                            </div>
+                              <%end%>
+                                <%end%>
+  </tbody>
+</table>
+</div>
+<%= link_to "作成画面に戻る", new_task_path, class: 'btn btn-outline-primary'%>
+>>>>>>> step5

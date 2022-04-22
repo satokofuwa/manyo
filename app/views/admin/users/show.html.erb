@@ -15,7 +15,7 @@
 <table>
   <% @user.tasks.each do |task| %>
     <tr>
-      <td>タスク名:<%= task.name %></td>
+      <td>タスク名:<%= task.title %></td>
       <td>内容:<%= task.content %></td>
       <td>作成日:<%= task.created_at %></td>
       <td>終了日:<%= task.expired_at %></td>

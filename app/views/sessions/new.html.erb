@@ -1,9 +1,21 @@
 <h1>Log in</h1>
 <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
   <%= f.label :email %>
+<<<<<<< HEAD
     <%= f.email_field :email %>
       <%= f.label :password %>
         <%= f.password_field :password %>
           <%= f.submit "Log in" %>
             <% end %>
               <%= flash[:notice] %>
+=======
+  <%= f.email_field :email %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.submit "Log in" %>
+<% end %>
+ <%= flash[:notice] %>
+ <!--<td><%= link_to 'ユーザー新規登録', new_admin_user_path,class:'btn btn-outline-primary' %></td>
+>>>>>>> step5
