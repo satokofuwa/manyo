@@ -24,7 +24,6 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
 
-
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'

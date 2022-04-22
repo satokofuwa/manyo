@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]  
   
   def new
+    if logged_in?
+      redirect_to tasks_path
+    end
     @user = User.new
   end        
     
@@ -18,20 +21,23 @@ class UsersController < ApplicationController
   end
 
   def update
-    respond_to do |format|
       @user = User.find(params[:id])
       if @user.update(user_params)     
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
+         redirect_to tasks_url
+        flash[:notice] = "ユーザー情報が更新されました" 
+       
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        redirect_to tasks_url
+        flash[:notice] = "管理者一人の為更新できません" 
       end
-    end
   end
             
   def show
-  @tasks = Task.where(user_id: @user.id)
+    @tasks = Task.where(user_id: @user.id)
+    unless current_user.id == @user.id then
+        redirect_to tasks_path, notice: '他人のページへアクセスはできません'
+    end
+
   end
            
   def edit
@@ -40,8 +46,8 @@ class UsersController < ApplicationController
   def destroy
     if User.find(params[:id]).destroy
       redirect_to admin_users_path
-    else
-      redirect_to admin_users_path
+      flash[:notice] = "#{User.find(params[:id]).name}を削除しました"
+   
     end
   end
 
@@ -61,4 +67,5 @@ class UsersController < ApplicationController
      redirect_to tasks_path, flash[:notice]= "管理者以外はアクセスできません"
    end
   end
+
 end
