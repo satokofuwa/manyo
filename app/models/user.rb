@@ -9,11 +9,12 @@ class User < ApplicationRecord
 
   has_secure_password 
   has_many :tasks,dependent: :destroy
-   accepts_nested_attributes_for :tasks
-   private
-   def check_administrator_present?
-     if User.where(admin: "管理者").count == 0
-       raise ArgumentError, "管理者が0人になります。"
-     end 
-   end
+    accepts_nested_attributes_for :tasks
+
+private
+  def check_administrator_present?
+    if User.where(admin: "管理者").count == 0
+      raise ArgumentError, "管理者が0人になります。"
+    end 
+  end
 end

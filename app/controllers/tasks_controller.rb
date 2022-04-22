@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-    before_action :set_task, only: %i[show edit update destroy ]
-    before_action :check_user,only: :show
+  before_action :set_task, only: %i[show edit update destroy ]
+  before_action :check_user,only: :show
   
     def index
       @tasks = Task.order(created_at: :desc)
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     end
   
     def new
-        @task = Task.new
+      @task = Task.new
     end
 
     def confirm
@@ -44,11 +44,10 @@ class TasksController < ApplicationController
           @task.save
           flash[:notice] = "登録が完了しました。"
           redirect_to new_task_url
-            else
+        else
           flash[:notice] = "エラーが発生しました。"
           redirect_to new_task_url
         end
-    
     end
   
     def update
@@ -65,13 +64,12 @@ class TasksController < ApplicationController
   
     def destroy
       if @task.present?
-           @task.destroy
+        @task.destroy
         redirect_to tasks_url, notice:  "タスクが削除されました"
       end
     end 
   
     private
-  
     def set_task
       @task = Task.find(params[:id])
     end
@@ -84,7 +82,7 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
       if current_user.id != @task.user_id
       # ログインしているユーザーのIDと投稿されているユーザーのIDが違っている場合
-        redirect_to tasks_path, notice: '他人のページへアクセスはできません'
+      redirect_to tasks_path, notice: '他人のページへアクセスはできません'
       end
-  end
+    end
 end

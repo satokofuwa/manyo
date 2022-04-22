@@ -23,6 +23,7 @@ gem 'kaminari'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
+gem 'faker'
 
 
 group :development, :test do
@@ -33,7 +34,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'spring-commands-rspec'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'launchy'
 end
 
