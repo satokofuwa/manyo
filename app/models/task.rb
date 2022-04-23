@@ -4,8 +4,8 @@ class Task < ApplicationRecord
   
   belongs_to :user
   has_many :taggings,dependent: :destroy
-  has_many :labels, through: :taggings, dependent: :destroy
-
+  has_many :labels, through: :taggings
+  
   enum status: {"未着手": 0, "着手中": 1, "完了": 2}
   enum priority: {"低": 0, "中": 1, "高": 2}
 

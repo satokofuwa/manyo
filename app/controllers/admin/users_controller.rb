@@ -2,20 +2,14 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit  destroy ]
   before_action :login_required
 
-<<<<<<< HEAD
-  def index 
-   @users=User.all
-  end
-=======
  def index 
-  @users = User.all
+  @users = User.all.includes(:tasks)
   unless  current_user.id && current_user.admin == "管理者"
     
     redirect_to tasks_path, flash[:notice]= "管理者以外はアクセスできません"
   end
 
  end
->>>>>>> step5
  
   def new
     @user = User.new
@@ -30,7 +24,6 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
   def update
     @user = User.find(params[:id])
       if @user.update(user_params)   
@@ -55,19 +48,6 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_users_path, notice: "管理者がいなくなるので削除できません"
     end
   end
-=======
-
-
- def edit
- end
-
- def show
-  @tasks = Task.all.includes(:user)
-  @tasks = @tasks.page(params[:page]).per(5)
-end
-
->>>>>>> step5
-
 
 private 
   def user_params

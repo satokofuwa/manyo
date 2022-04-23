@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'ユーザー管理機能1', type: :system do
- 
+   before do
+    FactoryBot.create(:user)
+    FactoryBot.create(:second_user)
+  end
   describe '一般ユーザーのテスト1' do
     context 'ユーザがログインせずタスク一覧画面に飛ぼうとした時' do
       it 'ログイン画面に推移する' do
@@ -13,26 +16,13 @@ RSpec.describe 'ユーザー管理機能1', type: :system do
 
   describe '一般ユーザーのテスト2' do
     context '一般ユーザが他人の詳細画面に飛ぶとタスク一覧画面に遷移すること' do
-      before do
-        visit new_session_path
-        fill_in 'session[email]', with: 'general@test.com'
-        fill_in 'session[password]', with: '1234567+A'
-        click_on 'Log in'
-        visit new_task_path
-        fill_in 'task[title]', with: 'タスク1'
-        fill_in 'task[content]', with: 'コンテント1'
-        fill_in 'task[expired_at]',with: '2022-04-12'
-        select '未着手', from: 'task[status]'
-        select '高', from: 'task[priority]'
-        click_button '登録する'
-        click_button 'タスク作成'
-        visit tasks_path
-      end
-
       it'タスク管理支援画面の文字が表示される' do
-        click_on '詳細'
-        visit tasks_path
-        expect(page).to have_content "タスク管理支援画面"
+        visit new_session_path
+        fill_in 'session_email', with: 'general@test.com'
+        fill_in 'session_password', with: '1234567+A'
+        click_on 'Log in'
+        visit admin_user_path(1)
+        expect(page).to have_content "管理者専用ページです"
       end
     end
   end
@@ -106,24 +96,26 @@ RSpec.describe 'ユーザー管理機能1', type: :system do
     context '管理ユーザはユーザの詳細画面にアクセスできること' do
       it '管理ユーザで一般ユーザの詳細画面へ画面推移する' do
         visit new_session_path
-        fill_in 'session[email]', with: 'admin2@test.com'
+        fill_in 'session[email]', with: 'admin@test.com'
         fill_in 'session[password]', with: '1234567+A'
         click_on 'Log in'
-        visit admin_user_path(3)
-        expect(page).to have_content 'admin2@test.com'
+        visit admin_user_path(2)
+        expect(page).to have_content 'general@test.com'
         
       end
     end
     
     context '管理ユーザはユーザの編集画面からユーザを編集できること' do
+      FactoryBot.create(:third_user)
       it '編集したメールアドレスが一覧に表示されている' do 
         visit new_session_path
-        fill_in 'session[email]', with: 'admin2@test.com'
+        fill_in 'session[email]', with: 'admin@test.com'
         fill_in 'session[password]', with: '1234567+A'
         click_on 'Log in'
-        visit edit_admin_user_path(3)
-        fill_in 'user[password]',with: '000000'
-        fill_in 'user[password_confirmation]',with: '000000'
+        visit edit_admin_user_path(2)
+        fill_in 'user[password]', with: '000000'
+        fill_in 'user[password_confirmation]', with: '000000'
+        select '管理者', from: 'user[admin]'
         click_on '更新する'
         expect(page).to have_content "ユーザー情報が更新されました"
       end

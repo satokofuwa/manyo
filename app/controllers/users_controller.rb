@@ -2,18 +2,12 @@ class UsersController < ApplicationController
   before_action :set_user, :check_admin, only: %i[ show edit ]
   skip_before_action :login_required, only: [:new, :create]  
   
-<<<<<<< HEAD
-    def new
-      @user = User.new
-    end        
-=======
   def new
     if logged_in?
       redirect_to tasks_path
     end
-    @user = User.new
+      @user = User.new
   end        
->>>>>>> step5
     
     def create
       @user = User.new(user_params)
@@ -26,34 +20,6 @@ class UsersController < ApplicationController
         end
     end
 
-<<<<<<< HEAD
-    def update
-      respond_to do |format|
-        @user = User.find(params[:id])
-          if @user.update(user_params)     
-            format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-            format.json { render :show, status: :ok, location: @user }
-          else
-            format.html { render :edit, status: :unprocessable_entity }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
-          end
-      end
-    end
-            
-    def show
-      @tasks = Task.where(user_id: @user.id)
-    end
-           
-    def edit
-    end
-
-    def destroy
-      if User.find(params[:id]).destroy
-        redirect_to admin_users_path
-      else
-        redirect_to admin_users_path
-      end
-=======
   def update
       @user = User.find(params[:id])
       if @user.update(user_params)     
@@ -79,12 +45,13 @@ class UsersController < ApplicationController
 
   def destroy
     if User.find(params[:id]).destroy
-      redirect_to admin_users_path
-      flash[:notice] = "#{User.find(params[:id]).name}を削除しました"
-   
->>>>>>> step5
+      respond_to do |format|
+        format.html { redirect_to tasks_url, notice: 'タスクを削除しました！' }
+        format.json { head :no_content }
+      end
     end
-
+  end
+  
 
   private 
 
@@ -101,5 +68,4 @@ class UsersController < ApplicationController
       redirect_to tasks_path, flash[:notice]= "管理者以外はアクセスできません"
     end
   end
-
 end

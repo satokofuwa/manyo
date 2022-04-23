@@ -31,7 +31,7 @@ class TasksController < ApplicationController
     end
 
     def confirm
-      @task = current_user.tasks.build(task_params)
+      @task = current_user.tasks.new(task_params)
       redirect_to new_task_url  if @task.invalid?
     end
 
@@ -40,9 +40,8 @@ class TasksController < ApplicationController
     end
     
     def create
-      @task = current_user.tasks.build(task_params)
-        if @task.present?
-          @task.save
+      @task = current_user.tasks.new(task_params)
+        if @task.save
           flash[:notice] = "登録が完了しました。"
           redirect_to new_task_url
         else

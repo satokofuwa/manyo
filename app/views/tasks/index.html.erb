@@ -2,21 +2,6 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-1">
       <h3 class="font-weight-bold">タスク管理支援画面</h3>
-<<<<<<< HEAD
-    </div>
-    <div class="left-contents col-md-8">
-      <%= link_to '新規作成',new_task_path%>
-        <%= form_with url:tasks_path, scope: :task, method: :get, local: true do |form| %>
-          <%= form.text_field :search,id: '検索' %> <label for="exampleInputEmail1"><%= form.select :status, Task.statuses.keys.to_a, {prompt: "選択してください"},class: "status-select"%></label> <button type="button" class="btn btn-outline-primary"><%= link_to "優先度", tasks_path(priority_sort: "true"), id: '優先度' %></button> <button type="button" class="btn btn-outline-primary"><%= link_to "終了期限", tasks_path(sort_expired: "true",id: 'ソート' ) %></button>
-            <%= form.submit 'Search',title: nil %>
-              <% end %>
-    </div>
-  </div>
-  <%=@tasks.count%>件のタスクがあります。
-    <div class="left-contents col-md-10">
-      <table>
-        <%@tasks.each do |task| %>
-=======
     </div>
     <div class="left-contents col-md-8">
       <%= link_to '新規作成',new_task_path%>
@@ -31,7 +16,6 @@
     <%= flash[:notice] %>
       <%@tasks.each do |task| %>
         <% if  task.user_id == current_user.id %>
->>>>>>> step5
           <tr>
             <td class="test">ユーザー:
               <%= task.user.name %>
@@ -48,11 +32,8 @@
                 <td>ステータス:
                   <%= task.status %>
                 </td>
-<<<<<<< HEAD
-                <td class="priority">優先順位:
-=======
                 <td>優先順位:
->>>>>>> step5
+
                   <%= task.priority %>
                 </td>
                 <td>
@@ -65,17 +46,6 @@
                           <%= link_to '削除',task_path(task.id),class: 'btn btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
                         </td>
                     </td>
-<<<<<<< HEAD
-                    <% end %>
-                      <tr>
-      </table>
-    </div>
-    <div class="col-md-6 col-md-offset-1">
-      <%= paginate @tasks %>
-    </div>
-
-  
-=======
                     <tr>
                       <%end%>
                         <% end %>
@@ -85,4 +55,4 @@
   <div class="col-md-6 col-md-offset-1">
     <%= paginate @tasks %>
   </div>
->>>>>>> step5
+
