@@ -82,7 +82,7 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
       if current_user.id != @task.user_id
       # ログインしているユーザーのIDと投稿されているユーザーのIDが違っている場合
-      redirect_to tasks_path, notice: '他人のページへアクセスはできません'
+        redirect_to tasks_path, notice: '他人のページへアクセスはできません'
       end
     end
 end

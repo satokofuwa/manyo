@@ -106,7 +106,6 @@ RSpec.describe 'ユーザー管理機能1', type: :system do
     end
     
     context '管理ユーザはユーザの編集画面からユーザを編集できること' do
-      FactoryBot.create(:third_user)
       it '編集したメールアドレスが一覧に表示されている' do 
         visit new_session_path
         fill_in 'session[email]', with: 'admin@test.com'

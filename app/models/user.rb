@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_update :admin_update_check
+  before_destroy :admin_delete_check
   before_validation { email.downcase! }
   validates :name,  presence: true, length: { maximum: 30 }
   validates :password, length: { minimum: 6 }
@@ -8,23 +10,21 @@ class User < ApplicationRecord
   enum admin: {"管理者": true, "ユーザー": false}
 
   has_secure_password 
-
   has_many :tasks, dependent: :destroy
 
-  before_update :admin_update_check
-  before_destroy :admin_delete_check
+  private
 
-   private
-   def admin_update_check
-    if User.where(admin: true).count == 1 && self.admin
+  def admin_update_check
+    if User.where(admin: :true).count == 1 && !(self.admin) then
       throw(:abort) 
     end
   end
 
   def admin_delete_check
-    if User.where(admin: true).count == 1 && self.admin
+    if User.where(admin: :true).count <= 1 && self.admin then
       throw(:abort)
-      flash[:notice] ='管理者一人の為削除は削除できません'
+      flash[:notice] ="管理者一人の為削除は削除できません"
     end
   end
+
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, :check_admin, only: %i[ show edit ]
+  before_action :set_user, :check_user, only: %i[ show edit ]
   skip_before_action :login_required, only: [:new, :create]  
   
   def new
@@ -34,10 +34,6 @@ class UsersController < ApplicationController
             
   def show
     @tasks = Task.where(user_id: @user.id)
-    unless current_user.id == @user.id then
-        redirect_to tasks_path, notice: '他人のページへアクセスはできません'
-    end
-
   end
            
   def edit
@@ -46,13 +42,12 @@ class UsersController < ApplicationController
   def destroy
     if User.find(params[:id]).destroy
       respond_to do |format|
-        format.html { redirect_to tasks_url, notice: 'タスクを削除しました！' }
+        format.html { redirect_to tasks_url, notice: 'ユーザーを削除しました！' }
         format.json { head :no_content }
       end
     end
   end
   
-
   private 
 
   def user_params
@@ -63,9 +58,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def check_admin
-    unless @user.id == current_user.id || current_user.admin == "管理者"
-      redirect_to tasks_path, flash[:notice]= "管理者以外はアクセスできません"
+  def check_user
+    if @user.id != current_user.id
+      redirect_to tasks_path, notice: '管理者以外はアクセスできません'
     end
   end
 end

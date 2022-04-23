@@ -5,7 +5,6 @@ class Admin::UsersController < ApplicationController
  def index 
   @users = User.all.includes(:tasks)
   unless  current_user.id && current_user.admin == "管理者"
-    
     redirect_to tasks_path, flash[:notice]= "管理者以外はアクセスできません"
   end
 
