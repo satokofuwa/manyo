@@ -1,0 +1,27 @@
+
+   
+<h1 class="title">ユーザー新規登録</h1>
+<%= form_with(model: @user, url: admin_users_path, local: true) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %>件の値が不正です。</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="center-contents col-md-10"><%= f.label "名前" %></p>
+  <p class="center-contents col-md-10"><%= f.text_field :name, id: 'name' %></p>
+  <p class="center-contents col-md-10"><%= f.label "メールアドレス" %></p>
+  <p class="center-contents col-md-10"><%= f.email_field :email, id: 'email' %></p>
+  <p class="center-contents col-md-10"><%= f.label "パスワード" %></p>
+  <p class="center-contents col-md-10"><%= f.password_field :password, id: 'password' %></p>
+  <p class="center-contents col-md-10"><%= f.label "パスワード確認" %></p>
+  <p class="center-contents col-md-10"><%= f.password_field :password_confirmation, id: 'password_confirmation' %></p>
+  <p class="center-contents col-md-10"><%= f.label "権限" %></p>
+  <p class="center-contents col-md-10"><%= f.select :admin, User.admins.keys, {}, {id: 'user_admin'} %> </p>
+  <p class="center-contents col-md-10"><%= f.submit "送信", id: '送信' %></p>
+<% end %>

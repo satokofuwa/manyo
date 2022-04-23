@@ -10,16 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_10_061359) do
+ActiveRecord::Schema.define(version: 2022_04_20_012008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "labels", force: :cascade do |t|
+    t.string "label_name"
+    t.index ["label_name"], name: "index_labels_on_label_name", unique: true
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.bigint "label_id", null: false
+    t.index ["label_id"], name: "index_taggings_on_label_id"
+    t.index ["task_id"], name: "index_taggings_on_task_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
+    t.integer "status", default: 0, null: false
+    t.date "expired_at", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "priority", default: 0, null: false
     t.bigint "user_id"
     t.index ["title"], name: "index_tasks_on_title", unique: true
     t.index ["user_id"], name: "index_tasks_on_user_id"
@@ -31,7 +46,10 @@ ActiveRecord::Schema.define(version: 2022_04_10_061359) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "taggings", "labels"
+  add_foreign_key "taggings", "tasks"
 end

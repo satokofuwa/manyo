@@ -1,0 +1,34 @@
+<div class="left-contents col-md-2">
+ <h1><%= @user.name %>のページ</h1>
+</div> 
+<div class="left-contents col-md-4"> 
+  <p>名前: <%= @user.name %></p>
+</div>
+<div class="left-contents col-md-3">
+  <p>メールアドレス: <%= @user.email %></p>
+</div>
+<div class="left-contents col-md-3">
+  <p>権限:<%= @user.admin %></p>
+</div>
+<div class="left-contents col-md-3">
+   <%= @user.name %>さん
+   <%= @tasks.count%>件のタスクがあります。
+</div>
+
+<div class="left-contents col-md-6">
+    <table>
+        <%@tasks.each do |task| %>
+        <tr>
+          <td class = "test",class="border-bottom">タスク名:<%= task.title %> </td>
+          <td>内容:<%= task.content %></td>
+          <td class = "expired">終了期限:<%= task.expired_at %></td>
+          <td>ステータス:<%= task.status %></td>
+          <td class= "priority">優先順位:<%= task.priority %></td>
+          <td><%= link_to '編集 ', edit_task_path(task.id),class: 'btn btn-outline-success', data: { confirm: '本当に編集していいですか？' } %></td>
+          <td><%= link_to '削除', task_path(task.id), method: :delete ,class: 'btn btn-outline-danger',data: { confirm: '本当に削除していいですか？' } %></td>
+      </tr>
+    <% end %>
+    </table>
+</div>
+<%= link_to 'タスク一覧へ',tasks_path, class: 'btn btn-outline-primary'%>
+

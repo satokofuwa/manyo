@@ -1,4 +1,7 @@
-<div class = field>
+<div class="left-contents col-md-8">
   <h1>Task 作成画面</h1>
-</div>
+    <%= flash[:notice] %>
+  </div>
+  <div>
   <%= render 'form', task: @task %>
+  </div>
