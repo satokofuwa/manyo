@@ -25,5 +25,4 @@ FactoryBot.define do
     password_confirmation {'1234567+A'} 
     admin { "管理者" }
 end
-
 end
