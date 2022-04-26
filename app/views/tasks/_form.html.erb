@@ -9,26 +9,23 @@
       </ul>
     </div>
   <% end %>
-      <div class="field">
-      <%= form.label :ラベル %>
-      <%= form.collection_check_boxes(:label_ids, Label.all, :id, :label_name) %>
-    </div>
-
-<div class="field">
-<table>
- 
+  <div class="field">
+    <%= form.label :ラベル %>
+    <%= form.collection_check_boxes(:label_ids, Label.all, :id, :label_name) %>
+  </div>
+  <table>
   <tr>
-    <div class="text">
+    <div class="field">
       <th><%= form.label :title %></th>
       <td><%= form.text_field :title %><td>
     </div>
 
-    <div class="text">
+    <div class="field">
       <th><%= form.label :content %><th>
       <td><%= form.text_field :content %><td>
     </div>
   
-    <div class="text">
+    <div class="field">
       <th><%= form.label :expired_at %><th>
       <td><%= form.text_field :expired_at %><td>
     </div>
@@ -41,7 +38,6 @@
       <th><%= form.label :priority %><th>
       <td><%= form.select :priority, Task.priorities.keys.to_a, {} %><td>
     </div>
-   
   </tr>
   </table>
   

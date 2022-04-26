@@ -4,7 +4,6 @@
       <h3> Task一覧</h3>
     </thead>
     <tbody>
-   
       <tr>
         <th>ID</th>
         <td>
@@ -23,17 +22,16 @@
           <%= @task.content %>
         </td>
       </tr>
-      
     </tbody>
   </table>
-   <tr>
-        <% @task.labels.each do |label| %>
+    <tr>
+      <% @task.labels.each do |label| %>
         <p>関連タグ<%=label.label_name %></p>
-        <% end %>
-      </tr>
+      <% end %>
+    </tr>
 </div>
-<div class="center-contents col-md-5">
-  <%= link_to 'Task 新規作成', new_task_path, class: 'btn btn-outline-primary' %>
+  <div class="center-contents col-md-5">
+    <%= link_to 'Task 新規作成', new_task_path, class: 'btn btn-outline-primary' %>
     <%= link_to 'Task 管理画面', tasks_path, class: 'btn btn-outline-primary'%>
-      <%= link_to '編集',edit_task_path(@task.id),class: 'btn btn-outline-success'%>
-</div>
+    <%= link_to '編集',edit_task_path(@task.id),class: 'btn btn-outline-success'%>
+  </div>

@@ -22,46 +22,43 @@
           <tr>
             <td class="test">ユーザー:
               <%= task.user.name %>
-                </p>
-                <td class="test">タスク名:
-                  <%= task.title %>
-                </td>
-                <td>内容:
-                  <%= task.content %>
-                </td>
-                <td class="expired">終了期限:
-                  <%= task.expired_at %>
-                </td>
-                <td>ステータス:
-                  <%= task.status %>
-                </td>
-                <td>優先順位:
-                  <%= task.priority %>
-                </td>
-                <td>
-                <% task.labels.each do |label| %>
-                    <%= label.label_name %>
-                  <% end %>   
-                </td>
-
-                <td> 
-                  <%= link_to '詳細',task_path(task.id),class: 'btn btn-outline-primary'%>
-                </td>
-                    <td>
-                      <%= link_to '編集',edit_task_path(task.id),class: 'btn btn-outline-success'%>
-                    </td> 
-                        <td>
-                          <%= link_to '削除',task_path(task.id),class: 'btn btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
-                        </td>
-                    </td>
-                    <tr>
-      <%end%>
-        <%end%>    
-                 
+              </td>
+            <td class="test">タスク名:
+              <%= task.title %>
+            </td>
+            <td>内容:
+              <%= task.content %>
+            </td>
+            <td class="expired">終了期限:
+              <%= task.expired_at %>
+            </td>
+            <td>ステータス:
+              <%= task.status %>
+            </td>
+            <td>優先順位:
+              <%= task.priority %>
+            </td>
+            <td>
+              <% task.labels.each do |label| %>
+                <%= label.label_name %>
+              <% end %>   
+            </td>
+            <td> 
+              <%= link_to '詳細',task_path(task.id),class: 'btn btn-outline-primary'%>
+            </td>
+            <td>
+              <%= link_to '編集',edit_task_path(task.id),class: 'btn btn-outline-success'%>
+              </td> 
+            <td>
+              <%= link_to '削除',task_path(task.id),class: 'btn btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          <tr>
+        <%end%>
+      <%end%>         
     </table>
-  </div>
-  <%= link_to 'Task 管理画面', tasks_path, class: 'btn btn-outline-primary'%>
-  <div class="col-md-6 col-md-offset-1">
+    </div>
+      <%= link_to 'Task 管理画面', tasks_path, class: 'btn btn-outline-primary'%>
+    <div class="col-md-6 col-md-offset-1">
     <%= paginate @tasks %>
   </div>
 

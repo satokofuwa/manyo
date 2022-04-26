@@ -4,8 +4,7 @@ class TasksController < ApplicationController
   
     def index
       @tasks = Task.order(created_at: :desc)
-      @labels = Label.all
-   
+      @labels = Label.all 
         #曖昧検索
         if params[:task].present?
           if params[:task][:search].present? && params[:task][:status].blank?
@@ -17,20 +16,12 @@ class TasksController < ApplicationController
           elsif params[:task][:label_ids].present? && params[:task][:search].blank? && params[:task][:status].blank?
             @tagging_id =Tagging.select(:task_id).where(label_id: params[:task][:label_ids]).pluck(:task_id)
             @tasks = @tasks.where(id: @tagging_id)
-           # @tagging_id =select Tagging.task_id where(label_id: params[:task][:label_ids]).pluck(:task_ids)
-            #@tagging_id =select :task_id, Tagging.where(label_id: params[:task][:label_ids]).pluck(:task_id)
-           # @labels = select :id ,Label.all.where(id: params[:task][:label_id]).pluck(:id)
-            #@tasks = @tasks.where(@labels)  
           end
-        elsif
-          params[:sort_expired] 
+        elsif params[:sort_expired] 
           @tasks = Task.order(expired_at: :desc)
-        elsif 
-          params[:priority_sort]
+        elsif params[:priority_sort]
           @tasks = @tasks.priority_sort
         end
-       # @tasks = Kaminari.paginate_array(@tasks).page(params[:page]).per(10)
-        #@tasks = Task.search(params[:search])
         @tasks=@tasks.page(params[:page]).per(10)
     end
   
@@ -51,7 +42,6 @@ class TasksController < ApplicationController
     def create
       @task = current_user.tasks.build(task_params)
         if @task.save
-       
           flash[:notice] = "登録が完了しました。"
           redirect_to new_task_url
         else
@@ -91,7 +81,6 @@ class TasksController < ApplicationController
     def check_user
       @task = Task.find(params[:id])
       if current_user.id != @task.user_id
-      # ログインしているユーザーのIDと投稿されているユーザーのIDが違っている場合
         redirect_to tasks_path, notice: '他人のページへアクセスはできません'
       end
     end
