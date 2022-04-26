@@ -1,4 +1,4 @@
-<%= form_with(model: @task, local: true, url:choose_new_or_edit) do |form| %>
+<%= form_with(model: @task, local: true) do |form| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
       <p class="error"><%= @task.errors.count %>件のエラーがあります。</p>
@@ -9,50 +9,53 @@
       </ul>
     </div>
   <% end %>
-
-<div class="left-contents col3">
-<table>
-<tr>
-    <div class="field">
-      <td><%= form.label :title %></td>
-      <td><%= form.text_field :title %><td>
-    </div>
-
-    <div class="field">
-      <td><%= form.label :content %><td>
-      <td><%= form.text_field :content %><td>
-    </div>
-
-    <div class="field">
-      <td><%= form.label :expired_at %><td>
-      <td><%= form.text_field :expired_at %><td>
-    </div>
-
-    <div class="field">
-      <td><%= form.label :status %><td>
-      <td><%= form.select :status, Task.statuses.keys.to_a, {} %><td>
-    </div>
-
-    <div class="field">
-      <td><%= form.label :priority %><td>
-      <td><%= form.select :priority, Task.priorities.keys.to_a, {} %><td>
-    </div>
-
-    <div class="field">
+      <div class="field">
       <%= form.label :ラベル %>
       <%= form.collection_check_boxes(:label_ids, Label.all, :id, :label_name) %>
     </div>
 
-      <div class="left-contents col-md-10">
-      <div class="actions" >
-        <%= form.submit%>
-      </div>
+<div class="field">
+<table>
+ 
+  <tr>
+    <div class="text">
+      <th><%= form.label :title %></th>
+      <td><%= form.text_field :title %><td>
+    </div>
+
+    <div class="text">
+      <th><%= form.label :content %><th>
+      <td><%= form.text_field :content %><td>
+    </div>
+  
+    <div class="text">
+      <th><%= form.label :expired_at %><th>
+      <td><%= form.text_field :expired_at %><td>
+    </div>
+ 
+    <div class="field">
+      <th><%= form.label :status %><th>
+      <td><%= form.select :status, Task.statuses.keys.to_a, {} %><td>
+    </div>
+    <div class="field">
+      <th><%= form.label :priority %><th>
+      <td><%= form.select :priority, Task.priorities.keys.to_a, {} %><td>
     </div>
    
-    </table>
-  </div>  
-  <% end %>
+  </tr>
+  </table>
+  
 
-<div class="left-contents col-md-10">
-  <%= link_to "一覧画面にもどる", tasks_path, class:'btn btn-outline-primary'%>
-</div>
+  <tr>
+    <div class="actions" >
+      <td> <%= form.submit%></td>
+    </div>
+  </tr>
+
+  </div>  
+  <div class="actions">
+    <%= link_to "一覧画面にもどる", tasks_path, class:'btn btn-outline-primary'%>
+  </div>
+<% end %>
+
+ 

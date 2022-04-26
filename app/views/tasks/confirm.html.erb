@@ -6,6 +6,7 @@
   <tbody>
     </div>
     <%= form_with(model: @task, local: true) do |form| %>
+
       <div class="left-contents col3">
         <%= form.submit "タスク作成" %>
       </div>
@@ -13,13 +14,19 @@
         <%= form.hidden_field :content %>
           <%= form.hidden_field :expired_at %>
             <%= form.hidden_field :status %>
+             <%= form.hidden_field :labels %>
               <%= form.hidden_field :priority %> <strong>タスク名: <%= @task.title %></strong></p>
                 <p><strong>内容: <%= @task.content %></strong></p>
                 <p><strong>終了期限: <%= @task.expired_at %></strong></p>
                 <p><strong>ステータス: <%= @task.status %></strong></p>
                 <p><strong>優先度: <%= @task.priority %></strong></p>
-                <td>
-                  <%= form.label :label_name %>
+                  <td>
+                  <% @task.labels.each do |label| %>
+                    <%= label.label_name %>
+                    <%= form.hidden_field :labels %>
+                  <% end %>
+
+                    <%= form.label :label_name %>
                     </td>
                       <td>
                         <%= collection_check_boxes(:task,:label_ids, Label.all, :id,:label_name)do |b| %>
@@ -30,8 +37,15 @@
                             </div>
                               <%end%>
                                 <%end%>
+                                 <%end%>
+                </td>
+
+              
   </tbody>
 </table>
+   <%end%>
 </div>
+
+
 <%= link_to "作成画面に戻る", new_task_path, class: 'btn btn-outline-primary'%>
 

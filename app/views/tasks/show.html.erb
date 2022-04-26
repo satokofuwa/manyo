@@ -4,6 +4,7 @@
       <h3> Task一覧</h3>
     </thead>
     <tbody>
+   
       <tr>
         <th>ID</th>
         <td>
@@ -22,8 +23,14 @@
           <%= @task.content %>
         </td>
       </tr>
+      
     </tbody>
   </table>
+   <tr>
+        <% @task.labels.each do |label| %>
+        <p>関連タグ<%=label.label_name %></p>
+        <% end %>
+      </tr>
 </div>
 <div class="center-contents col-md-5">
   <%= link_to 'Task 新規作成', new_task_path, class: 'btn btn-outline-primary' %>

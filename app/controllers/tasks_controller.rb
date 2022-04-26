@@ -4,16 +4,23 @@ class TasksController < ApplicationController
   
     def index
       @tasks = Task.order(created_at: :desc)
+      @labels = Label.all
+   
         #曖昧検索
         if params[:task].present?
           if params[:task][:search].present? && params[:task][:status].blank?
             @tasks = @tasks.keyword(params[:task][:search])
-          elsif 
-            params[:task][:status].present? && params[:task][:search].blank?
+          elsif params[:task][:status].present? && params[:task][:search].blank?
             @tasks = @tasks.status_select(params[:task][:status])
-          elsif
-            params[:task][:search].present? && params[:task][:status].present?
+          elsif params[:task][:search].present? && params[:task][:status].present?
             @tasks = @tasks.keyword_status(params[:task][:search],params[:task][:status])
+          elsif params[:task][:label_ids].present? && params[:task][:search].blank? && params[:task][:status].blank?
+            @tagging_id =Tagging.select(:task_id).where(label_id: params[:task][:label_ids]).pluck(:task_id)
+            @tasks = @tasks.where(id: @tagging_id)
+           # @tagging_id =select Tagging.task_id where(label_id: params[:task][:label_ids]).pluck(:task_ids)
+            #@tagging_id =select :task_id, Tagging.where(label_id: params[:task][:label_ids]).pluck(:task_id)
+           # @labels = select :id ,Label.all.where(id: params[:task][:label_id]).pluck(:id)
+            #@tasks = @tasks.where(@labels)  
           end
         elsif
           params[:sort_expired] 
@@ -22,12 +29,14 @@ class TasksController < ApplicationController
           params[:priority_sort]
           @tasks = @tasks.priority_sort
         end
+       # @tasks = Kaminari.paginate_array(@tasks).page(params[:page]).per(10)
+        #@tasks = Task.search(params[:search])
         @tasks=@tasks.page(params[:page]).per(10)
-      
     end
   
     def new
       @task = Task.new
+      @lebels = Label.new
     end
 
     def confirm
@@ -40,8 +49,9 @@ class TasksController < ApplicationController
     end
     
     def create
-      @task = current_user.tasks.new(task_params)
+      @task = current_user.tasks.build(task_params)
         if @task.save
+       
           flash[:notice] = "登録が完了しました。"
           redirect_to new_task_url
         else
@@ -75,7 +85,7 @@ class TasksController < ApplicationController
     end
   
     def task_params
-      params.require(:task).permit(:title, :content,:expired_at,:status,:priority,{ label_ids:[]})
+      params.require(:task).permit(:title, :content,:expired_at,:status,:priority,{ label_ids:[] })
     end
 
     def check_user

@@ -3,12 +3,15 @@
     <div class="col-md-6 col-md-offset-1">
       <h3 class="font-weight-bold">タスク管理支援画面</h3>
     </div>
-    <div class="left-contents col-md-8">
+    <div class="left-contents col-md-10">
       <%= link_to '新規作成',new_task_path%>
-        <%= form_with url:tasks_path, scope: :task, method: :get, local: true do |form| %>
+        <%= form_with model: @task, url:tasks_path, scope: :task, method: :get, local: true do |form| %>
           <%= form.text_field :search,id: '検索' %> <label for="exampleInputEmail1"><%= form.select :status, Task.statuses.keys.to_a, {prompt: "選択してください"},class: "status-select"%></label> <button type="button" class="btn btn-outline-primary"><%= link_to "優先度", tasks_path(priority_sort: "true"), id: '優先度' %></button> <button type="button" class="btn btn-outline-primary"><%= link_to "終了期限", tasks_path(sort_expired: "true",id: 'ソート' ) %></button>
-            <%= form.submit 'Search',title: nil %>
-              <% end %>
+            <%= form.select :label_ids, Label.all.collect{|label| [label.label_name, label.id ] }%>
+              <%= form.submit 'Search',title: nil %>
+        <% end %>  
+
+        
     </div>
   </div>
   <div class="left-contents col-md-10">
@@ -33,22 +36,28 @@
                   <%= task.status %>
                 </td>
                 <td>優先順位:
-
                   <%= task.priority %>
                 </td>
                 <td>
+                <% task.labels.each do |label| %>
+                    <%= label.label_name %>
+                  <% end %>   
+                </td>
+
+                <td> 
                   <%= link_to '詳細',task_path(task.id),class: 'btn btn-outline-primary'%>
-                    </button>
+                </td>
                     <td>
                       <%= link_to '編集',edit_task_path(task.id),class: 'btn btn-outline-success'%>
-                        </button>
+                    </td> 
                         <td>
                           <%= link_to '削除',task_path(task.id),class: 'btn btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
                         </td>
                     </td>
                     <tr>
-                      <%end%>
-                        <% end %>
+      <%end%>
+        <%end%>    
+                 
     </table>
   </div>
   <%= link_to 'Task 管理画面', tasks_path, class: 'btn btn-outline-primary'%>
